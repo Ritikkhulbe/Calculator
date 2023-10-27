@@ -1,14 +1,24 @@
-var oper = {
-    '+': (x, y) => x+y,
-    '-': (x, y) => x-y,
-    '*': (x, y) => x*y,
-    '/': (x, y) => x/y,
-    '%': (x, y) => x%y,
-    '^': (x, y) => x**y  
-}
 let pressed = false;
 let solution = 0;
 let answered = false;
+
+
+document.body.addEventListener('keydown', (event) => {
+    
+    let a = event.key;
+    console.log(a);
+    if((a>='0' && a<='9') || a === '+'  || a === '-'  || a === '/'  || a === '*'  || a === '%'  || a === '.' || a === '^'){
+        toDisplay(a);
+    }else if(a === 'Enter'){
+        answered = true;
+        calculate(document.querySelector('.disp').value);
+    }else if(a === 'Backspace'){
+        back();
+        calculate(document.querySelector('.disp').value);
+    }
+})
+
+
 function calculate(para){
     let nums = [];
     let op = [];
@@ -24,8 +34,6 @@ function calculate(para){
     })
     if(curr !== "")
         nums.push(Number(curr));
-    console.log(nums);
-    console.log(op);
     if(nums.length===op.length+1){
         while(op.length !== 0){
             op.forEach((ele, i) => {
@@ -87,6 +95,9 @@ function calculate(para){
     }
 
 }
+
+
+
 function toDisplay(para) {
     if(document.querySelector(".disp").value === '0' && para === '0')
         return;
@@ -110,4 +121,5 @@ function back(){
     let a = document.querySelector(".disp").value;
     a = a.slice(0, -1);
     document.querySelector(".disp").value = a;
+    calculate(document.querySelector('.disp').value);
 }
