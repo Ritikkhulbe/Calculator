@@ -37,11 +37,11 @@
             </div>
             <div class="line-5">
                 <button onclick="toDisplay('0')">0</button>
+                <button onclick="toDisplay('.')">.</button>
                 <button onclick="toDisplay('+')">+</button>
             </div>
             <div class="line-6">
-                <button onclick="">=</button>
-                <button onclick="toDisplay('.')">.</button>
+                <button onclick="pressed = true;calculate(document.querySelector('.disp').value);">=</button>
             </div>
         </div>
     </div>
