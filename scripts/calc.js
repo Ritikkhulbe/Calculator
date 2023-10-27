@@ -74,11 +74,12 @@ function calculate(para){
             })
         }
     }else if(pressed){
-        document.querySelector('.disp').value = 'err';
+        document.querySelector('.disp').value = 'error';
         pressed = false;
         answered = true;
     }
     solution = nums[0];
+    document.querySelector('.current-answer').innerHTML = solution;
     if(pressed){
         document.querySelector('.disp').value = solution;
         pressed = false;
@@ -87,9 +88,14 @@ function calculate(para){
 
 }
 function toDisplay(para) {
+    if(document.querySelector(".disp").value === '0' && para === '0')
+        return;
     if(!answered)
         document.querySelector(".disp").value +=para;
-    else{
+    else if(para==='+' || para==='-' || para==='/' || para==='*' || para==='^' || para==='%'){
+        document.querySelector(".disp").value +=para;
+        answered = false;
+    }else{
         document.querySelector(".disp").value=para;
         answered = false;
     }
@@ -98,4 +104,10 @@ function toDisplay(para) {
 
 function displayClear(){
     document.querySelector(".disp").value = "";
+}
+
+function back(){
+    let a = document.querySelector(".disp").value;
+    a = a.slice(0, -1);
+    document.querySelector(".disp").value = a;
 }
